@@ -2,6 +2,10 @@ package ch.makery.address.model;
 
 import java.time.LocalDate;
 
+import ch.makery.address.util.LocalDateAdapter;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -14,6 +18,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Marco Jakob
  */
+@XmlRootElement(name = "person")
 public class Person {
 
     private final StringProperty firstName;
@@ -47,6 +52,7 @@ public class Person {
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
     }
 
+    @XmlElement(name = "firstName")
     public String getFirstName() {
         return firstName.get();
     }
@@ -59,6 +65,7 @@ public class Person {
         return firstName;
     }
 
+    @XmlElement(name = "lastName")
     public String getLastName() {
         return lastName.get();
     }
@@ -71,6 +78,7 @@ public class Person {
         return lastName;
     }
 
+    @XmlElement(name = "street")
     public String getStreet() {
         return street.get();
     }
@@ -83,6 +91,7 @@ public class Person {
         return street;
     }
 
+    @XmlElement(name = "postalCode")
     public int getPostalCode() {
         return postalCode.get();
     }
@@ -95,6 +104,7 @@ public class Person {
         return postalCode;
     }
 
+    @XmlElement(name = "city")
     public String getCity() {
         return city.get();
     }
@@ -107,6 +117,8 @@ public class Person {
         return city;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlElement(name = "birthday")
     public LocalDate getBirthday() {
         return birthday.get();
     }
